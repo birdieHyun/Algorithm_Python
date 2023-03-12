@@ -8,5 +8,3 @@ answer.sort()
 
 print(*answer)
 
-for i in answer:
-    print(i)
