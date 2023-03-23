@@ -1,22 +1,27 @@
-from collections import deque
-
-def bfs(graph, start, visited):
-    queue = deque([start])
-    visited[start] = True
-    while queue:
-        v = queue.popleft()
-        visited[v] = True
-        print(v, end=' ')
-        for i in graph[v]:
-            if not visited[i]:
-                queue.append(i)
-                visited[i] = True
-
-visited = [False] * 20
+n, m = map(int, input().split())
 
 graph = []
-n, m = map(int, input().split())
 for i in range(n):
     graph.append(list(map(int, input())))
 
-bfs(graph, 1, visited)
+
+def dfs(x, y):
+    # 주어진 범위를 벗어나면 종료
+    if x <= -1 or x >= n or y <= -1 or y >= m:
+        return False
+    if graph[x][y] == 0:
+        graph[x][y] == 1
+        dfs(x - 1, y)
+        dfs(x, y - 1)
+        dfs(x + 1, y)
+        dfs(x, y + 1)
+        return True
+    return False
+
+result = 0
+for i in range(m):
+    for j in range(m):
+        if (dfs(i, j) == True):
+            result += 1
+
+print(result)
