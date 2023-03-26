@@ -14,3 +14,4 @@ score = [1, 2, 3, 1, 2, 3, 1]
 
 
 print(solution(3,4, score))
+print()
