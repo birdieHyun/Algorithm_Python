@@ -32,4 +32,3 @@ cities2 = ["Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo
 cacheSize3 = 2
 cities3 = "Jeju", "Pangyo", "NewYork", "newyork"
 print(solution(cacheSize3, cities3))
-
