@@ -13,8 +13,3 @@ def solution(k, tangerine):
         answer += 1
 
     return answer
-
-k = 6
-tangerine = [1, 3, 2, 5, 4, 5, 2, 3]
-
-print(solution(k, tangerine))
