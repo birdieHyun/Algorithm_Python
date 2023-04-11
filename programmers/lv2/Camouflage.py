@@ -1,4 +1,5 @@
 from collections import defaultdict
+import itertools
 
 def solution(clothes):
     answer = 1
