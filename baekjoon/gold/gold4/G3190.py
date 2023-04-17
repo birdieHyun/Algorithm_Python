@@ -20,7 +20,7 @@ def find_direction(str, now_direction):
         else:
             return 1
 
-    if now_direction == 3:
+    if now_direction == 3: 
         if str == 'D':
             return 1
         else:
