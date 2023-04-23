@@ -12,15 +12,15 @@ print(sorted_meeting)
 
 meeting.append(sorted_meeting[0])
 
-# for i in range(1, len(sorted_meeting)):
-#     index = len(meeting) - 1
-#
-#     if meeting[index][1] <= sorted_meeting[i][0]:
-#         meeting.append(sorted_meeting[i])
-#
-#     print(i, meeting)
-#     first_start = meeting[index][0]
-#     last_start = meeting[index][1]
-#
-#     queue_range = last_start - first_start
-#     print(queue_range)
+for i in range(1, len(sorted_meeting)):
+    index = len(meeting) - 1
+
+    if meeting[index][1] <= sorted_meeting[i][0]:
+        meeting.append(sorted_meeting[i])
+
+    print(i, meeting)
+    first_start = meeting[index][0]
+    last_start = meeting[index][1]
+
+    queue_range = last_start - first_start
+    print(queue_range)
