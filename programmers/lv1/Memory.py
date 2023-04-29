@@ -11,3 +11,5 @@ def solution(name, yearning, photo):
         answer.append(total_score)
 
     return answer
+
+print(solution())
