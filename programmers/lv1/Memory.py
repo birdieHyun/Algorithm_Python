@@ -13,3 +13,7 @@ def solution(name, yearning, photo):
     return answer
 
 print(solution())
+
+name = []
+yearing = []
+photo = []
