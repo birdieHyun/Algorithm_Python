@@ -20,15 +20,3 @@ def solution(cacheSize, cities):
             cache.popleft()
 
     return answer
-
-cacheSize = 3
-cities = ["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA"]
-# print(solution(cacheSize, cities))
-
-cacheSize2 = 3
-cities2 = ["Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul"]
-# print(solution(cacheSize2, cities2))
-
-cacheSize3 = 2
-cities3 = "Jeju", "Pangyo", "NewYork", "newyork"
-print(solution(cacheSize3, cities3))
