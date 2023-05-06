@@ -20,3 +20,5 @@ def solution(cacheSize, cities):
             cache.popleft()
 
     return answer
+
+print(solution())
