@@ -49,4 +49,3 @@ answer.sort()
 print(len(answer))
 for i in answer:
     print(i)
-

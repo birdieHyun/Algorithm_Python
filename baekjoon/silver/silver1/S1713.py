@@ -1,27 +1,39 @@
 from collections import deque
 
-frame_size = int(input())
-suggestion_count = int(input())
-suggest_list = list(map(int, input().split()))
+collect_size = int(input())
+students = int(input())
+std_list = list(map(int, input().split()))
 
-total_student = max(suggest_list) + 1
-photo_frame = deque()
-students = [[i, 0] for i in range(total_student)]
+collect = deque()
 
-for i in range(suggestion_count):
-    suggested = suggest_list[i]
-    students[suggested][1] += 1
+for i in range(students):
+    std = std_list[i]
 
-    print(photo_frame)
-    photo_frame = deque(sorted(photo_frame, key=lambda x: [1]))
+    if any(student[0] == std for student in collect):
+        tmp = [student[0] for student in collect].index(std)
+        collect[tmp][1] += 1       # 추천 수 더해준다.
 
-    if len(photo_frame) == frame_size:
-        for i in range(len(photo_frame)):
-            if photo_frame[i] <= photo_frame[i + 1]:
-                print(photo_frame.popleft())
-                break
-    if students[suggested] not in photo_frame:
-        photo_frame.append(students[suggested])
+        while tmp < collect_size - 1: # tmp 를 전체 사이즈 순회하면서 적절한 위치로 옮겨준다.
+            if collect[tmp][1] >= collect[tmp + 1][1]:       # 추천수가 같거나 크다면 위치를 바꿔준다.
+                collect[tmp], collect[tmp + 1] = collect[tmp + 1], collect[tmp]
+            tmp += 1
 
+    # collect 에 없을 경우
+    else:
+        collect.append([std, 1])
 
-print(photo_frame)
+        # 사이즈 비교를 해준다.
+        if len(collect) > collect_size:
+            collect.popleft()
+
+            tmp = [student[0] for student in collect].index(std)
+
+            while tmp > 0:
+                if collect[tmp][1] < collect[tmp - 1][1]:
+                    collect[tmp][1], collect[tmp - 1][1] = collect[tmp - 1][1], collect[tmp][1]
+                tmp -= 1
+
+answer = sorted(collect, key = lambda x : x[0])
+
+for i in range(len(answer)):
+    print(answer[i][0], end=' ')
