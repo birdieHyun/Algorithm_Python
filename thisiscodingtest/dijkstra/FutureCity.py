@@ -42,9 +42,4 @@ def dijkstra(start):
 
 dijkstra(start)
 
-result = []
-
-for i in range(1, n + 1):
-    result.append(distance[i])
-
-print(result)
+print(distance)
