@@ -1,26 +1,14 @@
-from collections import *
+meetings = int(input())
 
-meeting = deque()
+meet_list = [list(map(int, input().split())) for _ in range(meetings)]
 
-meeting_count = int(input())
+meet_list.sort(key=lambda x : (x[1], x[0],))
 
-meeting_list = [list(map(int, input().split())) for _ in range(meeting_count)]
+answer, last = 0, 0
 
-# [[0, 6], [1, 4], [2, 13], [3, 5], [3, 8], [5, 7], [5, 9], [6, 10], [8, 11], [8, 12], [12, 14]]
-sorted_meeting = sorted(meeting_list, key=lambda x: x[0])
-print(sorted_meeting)
+for start, finish in meet_list:
+    if start >= last:
+        answer += 1
+        last = finish
 
-meeting.append(sorted_meeting[0])
-
-for i in range(1, len(sorted_meeting)):
-    index = len(meeting) - 1
-
-    if meeting[index][1] <= sorted_meeting[i][0]:
-        meeting.append(sorted_meeting[i])
-
-    print(i, meeting)
-    first_start = meeting[index][0]
-    last_start = meeting[index][1]
-
-    queue_range = last_start - first_start
-    print(queue_range)
+print(answer)
