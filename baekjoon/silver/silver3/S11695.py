@@ -1,12 +1,16 @@
-num_len, test_case = map(int, input().split())
+import sys
+input = sys.stdin.readline
 
-nums = list(map(int, input().split()))
-check = [0]
+m, n = map(int, input().split())
+arr = list(map(int, input().split()))
+prefix_sum = [0]  # init prefix_sum
 
-for i in range(len(nums)):
-    check.append(check[i] + nums[i])
+temp = 0
+for i in arr:  # accumulate arr section
+    temp += i
+    prefix_sum.append(temp)
 
-for _ in range(test_case):
-    from_num, to_num = map(int,input().split())
+for i in range(n):
+    a, b = map(int, input().split())
+    print(prefix_sum[b] - prefix_sum[a - 1])
 
-    print(check[to_num] - check[from_num - 1])
