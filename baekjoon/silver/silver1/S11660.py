@@ -1,21 +1,29 @@
-def solution(s, word_dict):
+import sys
 
-    dp = [0 for _ in range(len(s) + 1)]
-    n = len(s)
-    for i in range(4, n + 1):
-        for word in word_dict:
-            if s[i - len(word) : i] == word:
-                dp[i] = max(dp[i - len(word) + 1] + 1, dp[i])
+input = sys.stdin.readline
 
-    return dp[n]
+N, M = map(int, input().split())
 
+numbers = [list(map(int, input().split())) for _ in range(N)]
 
-# 테스트
-s1 = "centerminus"
-word_dict1 = ["cent", "center", "term", "terminus", "rm", "min", "minus", "us"]
-print(solution(s1, word_dict1))  # 기대값: 3
+sums = [list(map(int, input().split())) for _ in range(M)]
 
-s2 = "aaaababab"
-word_dict2 = ["aaa", "aaaa", "ab", "bab", "aababa"]
-print(solution(s2, word_dict2))  # 기대값: 4
+dp = [[0] * N for _ in range(N)]
 
+dp[0][0] = numbers[0][0]
+
+for i in range(1, N):
+    dp[0][i] = dp[0][i - 1] + numbers[0][i]
+
+for i in range(1, N):
+    for j in range(N):
+        if j == 0:
+            dp[i][j] = dp[i - 1][N - 1] + numbers[i][j]
+            continue
+        dp[i][j] = dp[i][j - 1] + numbers[i][j]
+
+for i in sums:
+    x1, y1, x2, y2 = i
+    to_num = dp[y2- 1][x2 - 1]
+    from_num = dp[y1 - 1][x1 - 1]
+    print(to_num - from_num)

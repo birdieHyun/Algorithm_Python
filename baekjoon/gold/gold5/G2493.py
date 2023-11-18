@@ -1,20 +1,17 @@
-from collections import deque
-
-q = deque()
-
 N = int(input())
-top = list(map(int, input().split()))
+towers = list(map(int, input().split()))
+stack = []
+answer = []
 
-answer = [0] * N
+for i in range(N):
+    while stack:
+        if stack[-1][1] > towers[i]:  # 수신 가능한 상황
+            answer.append(stack[-1][0] + 1)
+            break
+        else:
+            stack.pop()
+    if not stack:  # 스택이 비면 레이저를 수신할 탑이 없다.
+        answer.append(0)
+    stack.append([i, towers[i]])  # 인덱스, 값
 
-for i in range(N - 1, -1, -1):
-    if len(q) > 0:
-
-
-    else:
-        q.append((top[i], i))
-
-print(q)
-print(q.pop())
-
-print(answer)
+print(" ".join(map(str, answer)))
