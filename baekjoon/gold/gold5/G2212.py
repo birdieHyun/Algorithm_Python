@@ -23,4 +23,5 @@ dist.sort(reverse=True)
 for _ in range(K-1):
     dist.pop(0)
 
-print(sum(dist))
+result = sum(dist)
+print(result)
