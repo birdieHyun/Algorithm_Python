@@ -1,42 +1,42 @@
 from collections import deque
+import sys
+input = sys.stdin.readline
 
 node, link, start = map(int, input().split())
 
-graph = [[] for _ in range(node + 1)]
+dfs_visited = [False] * (node + 1)
+bfs_visited = [False] * (node + 1)
 
-dfs_visit = [False] * (node + 1)
-bfs_visit = [False] * (node + 1)
+map_link = [[] for _ in range(node + 1)]
 
 for _ in range(link):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    map_link[a].append(b)
+    map_link[b].append(a)
 
-# 문제에서 작은 수 부터 들어가도록 요구
-for i in graph:
+for i in map_link:
     i.sort()
 
 def dfs(start):
-    dfs_visit[start] = True
-    print(start, end=" ")
-    for i in graph[start]:
-        if not dfs_visit[i]:
-             dfs(i)
-
+    dfs_visited[start] = True
+    print(start, end=' ')
+    for i in map_link[start]:
+        if not dfs_visited[i]:
+            dfs(i)
 
 def bfs(start):
-    queue = deque()
-    queue.append(start)
-    bfs_visit[start] = True
+    bfs_visited[start] = True
+    q = deque()
+    q.append(start)
 
-    while queue:
-        tmp = queue.popleft()
-        print(tmp, end=" ")
+    while q:
+        next_node = q.popleft()
+        print(next_node, end=' ')
 
-        for i in graph[tmp]:
-            if not bfs_visit[i]:
-                queue.append(i)
-                bfs_visit[i] = True
+        for i in map_link[next_node]:
+            if not bfs_visited[i]:
+                bfs_visited[i] = True
+                q.append(i)
 
 dfs(start)
 print()
