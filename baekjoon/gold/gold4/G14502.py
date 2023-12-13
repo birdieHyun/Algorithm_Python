@@ -10,10 +10,6 @@ for i in range(len(original_maps)):
         if original_maps[i][j] == 2:
             virus.append((j, i))
 
-zero_count = 0
-for i in range(N):
-    zero_count += original_maps[i].count(0)
-
 dx = [0, 0, -1, 1]
 dy = [-1, 1, 0, 0]
 
@@ -28,11 +24,9 @@ def bfs(blocks):
     # 벽 3개를 세운다.
     for i in blocks:
         copy_map[i[1]][i[0]] = 1
-    q = deque()
 
     # 바이러스 시작하는 정점 삽입
-    for i in virus:
-        q.append(i)
+    q = deque(virus)
 
     # visited 배열은 0 인 곳만 이동할 수 있게 할 것이기 때문에 만들지 않는다.
 
