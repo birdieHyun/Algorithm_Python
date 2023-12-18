@@ -6,6 +6,7 @@ input = sys.stdin.readline
 n, k, m = map(int, input().split())
 
 visited = [False] * (n + 1)
+tube_visited = [False] * m
 cost = [0] * (n + 1)
 cost[1] = 1
 
@@ -20,8 +21,7 @@ for i in range(m):
     hyper_tube.append(tube)
 
 def bfs(node):
-    q = deque()
-    q.append(node)
+    q = deque([node])
 
     while q:
         now = q.popleft()
@@ -30,14 +30,16 @@ def bfs(node):
         next_tube = nodes[now]
 
         for i in next_tube:
-            for j in hyper_tube[i]:
-                if not visited[j]:
+            if not tube_visited[i]:
+                tube_visited[i] = True
+                for j in hyper_tube[i]:
+                    if not visited[j]:
 
-                    print(j)
-                    visited[j] = True
-                    q.append(j)
-                    cost[j] = cost[now] + 1
-
+                        visited[j] = True
+                        q.append(j)
+                        cost[j] = cost[now] + 1
+                        if j == n:
+                            return
 
 bfs(1)
 
