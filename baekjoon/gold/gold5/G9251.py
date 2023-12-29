@@ -1,23 +1,15 @@
-A = str(input().strip())
-B = str(input().strip())
+A = str(input())
+B = str(input())
 
-last_index = 0
-a_answer = []
-b_answer = []
+dp = [[0] * (len(B) + 1) for _ in range(len(A) + 1)]
 
-for i in range(len(A)):
-    for j in range(last_index, len(B)):
-        if A[i] == B[j]:
-            a_answer.append(B[j])
-            last_index = j + 1
-            break
+for i in range(1, len(A) + 1):
 
-last_index = 0
-for i in range(len(B)):
-    for j in range(last_index, len(A)):
-        if B[i] == A[j]:
-            b_answer.append(A[j])
-            last_index = j + 1
-            break
+    for j in range(1, len(B) + 1):
 
-print(max(len(a_answer), len(b_answer)))
+        if A[i - 1] == B[j - 1]:
+            dp[i][j] = dp[i - 1][j - 1] + 1
+        else:
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+print(dp[len(A)][len(B)])
