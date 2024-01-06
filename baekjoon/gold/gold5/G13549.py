@@ -1,24 +1,22 @@
-# N 부터 0 까지 -1 씩 하면서 dp 채워줌
-# i 가 짝수면, dp[i] = min(dp[i / 2], dp[i-1] + 1)
-# i 가 홀수면, dp[i] = min(dp[i / 2] + 1, dp[i-1] + 1)
+from collections import deque
 
-N, K = map(int, input().split())
+n, k = map(int, input().split())  # n: 수빈이가 있는 위치, k: 동생이 있는 위치
+q = deque()
+q.append(n)
+visited = [-1 for _ in range(100001)]
+visited[n] = 0
 
-dp = [0] * (K + 1)
-
-
-tmp = 0
-for i in range(N, 0, -1):
-    dp[i] = tmp
-    tmp += 1
-
-for i in range(N + 1, K + 1):
-    # 짝수면
-    if i % 2 == 0:
-        index = int(i / 2)
-        dp[i] = min(dp[i - 1] + 1, dp[index])
-
-    # 홀수면
-    else:
-        index = int(i / 2)
-        dp[i] = min(dp[i - 1] + 1, dp[index] + 1)
+while q:
+    s = q.popleft()
+    if s == k:
+        print(visited[s])
+        break
+    if 0 <= s-1 < 100001 and visited[s-1] == -1:
+        visited[s-1] = visited[s] + 1
+        q.append(s-1)
+    if 0 < s*2 < 100001 and visited[s*2] == -1:
+        visited[s*2] = visited[s]
+        q.appendleft(s*2)  # 2*s 가 다른 연산보다 더 높은 우선순위를 가지기 위함
+    if 0 <= s+1 < 100001 and visited[s+1] == -1:
+        visited[s+1] = visited[s] + 1
+        q.append(s+1)
