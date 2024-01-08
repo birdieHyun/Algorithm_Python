@@ -1,31 +1,39 @@
-from collections import deque
+bracket = list(input())
 
-stack = deque()
+stack = []
+answer = 0
+tmp = 1
 
-bracket = str(input())
+for i in range(len(bracket)):
 
-answer = ''
+    if bracket[i] == "(":
+        stack.append(bracket[i])
+        tmp *= 2
 
-stack.append(bracket[0])
+    elif bracket[i] == "[":
+        stack.append(bracket[i])
+        tmp *= 3
 
-if bracket[0] == '(':
-    answer += '(2'
-else:
-    answer += '(3'
+    elif bracket[i] == ")":
+        if not stack or stack[-1] == "[":
+            answer = 0
+            break
+        if bracket[i-1] == "(":
+            answer += tmp
+        stack.pop()
+        tmp //= 2
 
-for i in range(1, len(bracket)):
-    tmp = bracket[i]
-
-    # answer += ')+'
-    if tmp == ')' or tmp == ']':
-        answer += ')'
-
-    elif tmp == '(':
-        answer += '2'
     else:
-        answer += '3'
+        if not stack or stack[-1] == "(":
+            answer = 0
+            break
+        if bracket[i-1] == "[":
+            answer += tmp
 
-    answer += '*('
-    stack.append(tmp)
+        stack.pop()
+        tmp //= 3
 
-print(answer)
+if stack:
+    print(0)
+else:
+    print(answer)
